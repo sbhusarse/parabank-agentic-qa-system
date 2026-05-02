@@ -1,0 +1,14 @@
+Feature: Fund Transfer
+
+As a Parabank customer,
+I want to transfer funds between my accounts,
+So that I can manage my money online.
+
+Acceptance Criteria:
+1. User should be logged in.
+2. User should select a source account.
+3. User should select a destination account.
+4. User should enter a valid amount.
+5. System should transfer funds successfully for valid inputs.
+6. System should show an error for invalid amount.
+7. System should show an error for insufficient balance.
