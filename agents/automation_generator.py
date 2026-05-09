@@ -44,27 +44,40 @@ def fetch_ready_issues():
 
 def generate_playwright_test(test_case_text):
     prompt = f"""
-You are a QA Automation Engineer.
+    You are a senior QA Automation Engineer.
 
-Convert the following test case into a Playwright Python test using pytest.
+    Convert the following GitHub Issue test case into a Playwright Python test using pytest.
 
-Requirements:
-- Return only raw Python code
-- Do not include markdown
-- Do not include ```python
-- Use Playwright Python sync API
-- Use pytest
-- Use page.goto()
-- Include assertions
-- Use clear selectors and comments if selectors are assumed
-- Every test must import and use:
-  from helpers.parabank_auth import login_to_parabank
-- Every test must call login_to_parabank(page) before testing authenticated Parabank flows
-- Do not generate login steps manually
+    STRICT RULES:
+    - Return only raw Python code
+    - Do not include markdown
+    - Do not include ```python
+    - Do not use sync_playwright()
+    - Do not create browser, context, or page manually
+    - Use the pytest page fixture
+    - Test function must accept page as a parameter
+    - Import and use:
+    from helpers.parabank_auth import login_to_parabank
+    - Call login_to_parabank(page) before testing authenticated Parabank flows
+    - Do not generate login steps manually
+    - Do not use guessed direct URLs like /fund-transfer
+    - Navigate using visible links or stable selectors
+    - Use Playwright sync API
+    - Include clear assertions
+    - Keep the test simple and executable
 
-Test Case:
-{test_case_text}
-"""
+    Example structure:
+
+    from helpers.parabank_auth import login_to_parabank
+
+    def test_example_name(page):
+        login_to_parabank(page)
+        page.get_by_text("Transfer Funds").click()
+        assert "Transfer Funds" in page.inner_text("body")
+
+    Test Case:
+    {test_case_text}
+    """
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",

@@ -2,10 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from helpers.parabank_auth import login_to_parabank
 
-def test_fund_transfer_with_valid_inputs():
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
+def test_successful_fund_transfer(page):
         
         # Log in to Parabank
         login_to_parabank(page)

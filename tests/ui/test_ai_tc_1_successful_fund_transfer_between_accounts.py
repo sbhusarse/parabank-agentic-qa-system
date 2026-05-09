@@ -2,10 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from helpers.parabank_auth import login_to_parabank
 
-def test_successful_fund_transfer():
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
+def test_successful_fund_transfer(page):
         
         # Log in to Parabank
         login_to_parabank(page)
@@ -13,7 +10,7 @@ def test_successful_fund_transfer():
         # Step 1: Navigate to the Fund Transfer section
         #page.goto("https://parabank.parasoft.com/parabank/transfer.htm")
         page.click("text='Transfer Funds'")  # Assuming there's a link or button with this text
-        
+
         # Step 2: Select a source account
         page.select_option("select#fromAccountId", "14565")  # Assuming account ID 1 is a valid source
         
