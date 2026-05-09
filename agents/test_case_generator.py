@@ -16,20 +16,25 @@ def generate_test_cases(requirement_text):
     prompt = f"""
 You are a senior QA engineer.
 
-Generate structured test cases for the requirement below.
+Generate test cases in STRICT structured format.
 
-Create:
-- Positive test cases
-- Negative test cases
-- Edge test cases
+Each test case must be separated by:
 
-Use this format:
+### TEST CASE ###
+
+Format for each test case:
 
 Title:
 Type:
+Priority:
 Preconditions:
 Steps:
 Expected Result:
+
+Generate at least:
+- 2 positive
+- 2 negative
+- 1 edge case
 
 Requirement:
 {requirement_text}
