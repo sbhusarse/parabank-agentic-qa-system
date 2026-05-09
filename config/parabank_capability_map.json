@@ -1,0 +1,25 @@
+{
+  "supported_workflows": [
+    "login",
+    "register_user",
+    "account_overview",
+    "open_new_account",
+    "transfer_funds_valid_amount",
+    "bill_payment_valid_data",
+    "find_transactions"
+  ],
+  "not_supported_or_unreliable": [
+    "negative_amount_validation",
+    "insufficient_balance_validation",
+    "backend_balance_setup",
+    "complex_edge_case_validation",
+    "security_validation",
+    "performance_validation"
+  ],
+  "automation_rules": {
+    "generate_code_only_if_supported": true,
+    "require_login_for_authenticated_flows": true,
+    "avoid_direct_guessed_urls": true,
+    "use_existing_helpers": true
+  }
+}
